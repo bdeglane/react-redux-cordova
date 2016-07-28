@@ -1,0 +1,26 @@
+@import "../../../style/variable";
+
+.app-title {
+  h1 {
+    //font-family: $heading-font;
+  }
+}
+
+.menu--main {
+  margin: 0;
+  li {
+    a {
+      align-items: center;
+      text-align: center;
+      color: $black;
+      &.active {
+        color: $secondary;
+      }
+      span {
+        span.fa {
+          font-size: 1.7em;
+        }
+      }
+    }
+  }
+}

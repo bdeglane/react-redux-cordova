@@ -1,0 +1,10 @@
+@import "../../../../style/variable";
+
+#add-contact {
+  label {
+    color: $secondary;
+  }
+  input {
+    border-bottom: 2px solid $secondary;
+  }
+}
