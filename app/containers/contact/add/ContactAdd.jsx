@@ -45,6 +45,22 @@ export default class ContactAdd extends React.Component {
 	 *
 	 * @param e
 	 */
+	takePicture(e) {
+		e.preventDefault();
+		navigator.camera.getPicture((image)=> {
+			console.log(image);
+			this.setState({img: image}, ()=> console.log(this.state));
+		}, (message)=> {
+			console.log(message);
+		}, {
+			quality: 50
+		});
+	}
+
+	/**
+	 *
+	 * @param e
+	 */
 	validate(e) {
 		e.preventDefault();
 		this.props.addContact(this.state)
@@ -82,6 +98,12 @@ export default class ContactAdd extends React.Component {
 								   onChange={(e)=>this.onHandleChange(e,'tel')}/>
 						</div>
 						<div className="grid-content">
+							<input type="button" value="take picture" onClick={(e)=> this.takePicture(e)}/>
+							<div className="grid-content">
+								<img src={this.state.img} alt=""/>
+							</div>
+						</div>
+						<div className="grid-content">
 							<input type="submit" onClick={(e)=> this.validate(e)}/>
 						</div>
 					</form>
@@ -107,4 +129,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactAdd);
+export default connect(null, mapDispatchToProps)(ContactAdd);
