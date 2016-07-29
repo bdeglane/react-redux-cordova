@@ -8,4 +8,3 @@ if (window.location.protocol === 'file:') {
 } else {
 	app.start();
 }
-

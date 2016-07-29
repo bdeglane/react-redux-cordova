@@ -23,3 +23,13 @@ export const removeContact = (contact) => {
 		contact
 	}
 };
+
+/**
+ *
+ * @param contact
+ */
+export const singleContact = (contact) => {
+	return function (dispatch) {
+
+	}
+};

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Icon } from 'react-fa';
 
 export default class ContactSingle extends React.Component {
 	constructor(props) {
@@ -8,38 +9,34 @@ export default class ContactSingle extends React.Component {
 		console.log(props);
 	}
 
-	removeContact(e, contact) {
+	removeContact(e, id) {
 		e.preventDefault();
-		console.log(contact);
-		//this.props.removeContact(contact);
+		this.props.removeContact(id);
 	}
 
 	render() {
+		let contact = JSON.parse(this.props.location.query.contact);
 		return (<div className="grid-block vertical">
-			<div className="grid-content">
-				<h1>{this.props.nom} {this.props.prenom}</h1>
+			<div className="grid-content shrink">
+				<h1>{contact.prenom} {contact.nom}</h1>
 			</div>
-			<div className="grid-content">
-
+			<div className="grid-content shrink">
+				<Icon name="phone"/> {contact.tel}
+			</div>
+			<div className="grid-content shrink">
+				<Icon name="envelope-o"/> {contact.email}
+			</div>
+			<div className="grid-content shrink">
+				<a href="#" onClick={(e)=> this.removeContact(e,contact.id)}>
+					<Icon name="remove"/> Remove
+				</a>
+			</div>
+			<div className="grid-content shrink">
+				<img src={contact.img} alt=""/>
 			</div>
 		</div>)
 	}
 }
-
-ContactSingle.propTypes = {
-	id: PropTypes.string,
-	nom: PropTypes.string,
-	prenom: PropTypes.string,
-	email: PropTypes.string,
-	tel: PropTypes.string,
-	img: PropTypes.string
-};
-
-const mapStateToProps = (state) => {
-	return {
-		nom: state.contact.contacts
-	}
-};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -49,6 +46,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactSingle);
-
-// onClick={(e,item)=> this.removeContact(e,item)}
+export default connect(null, mapDispatchToProps)(ContactSingle);

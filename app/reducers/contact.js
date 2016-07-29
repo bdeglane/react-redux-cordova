@@ -42,20 +42,27 @@ const initialState = {
  */
 export const contact = (state = getState(), action) => {
 	switch (action.type) {
+
 		case actions.ADD_CONTACT:
 			state.contacts.push(action.param);
 			localStorage.setItem('contactApp', JSON.stringify(state));
 			hashHistory.push('/list');
 			return state;
 			break;
+
 		case actions.REMOVE_CONTACT:
-			let contact = state.contacts.indexOf(action.param);
-			if (contact != 'undefined') {
-				state.contacts.splice(contact, 1);
-				localStorage.setItem('contactApp', JSON.stringify(state));
+			let contact = state.contacts.find((contact)=> action.param === contact.id);
+			if (typeof contact == 'object') {
+				let toRemove = state.contacts.indexOf(contact);
+				if (contact != 'undefined') {
+					state.contacts.splice(toRemove, 1);
+					localStorage.setItem('contactApp', JSON.stringify(state));
+					hashHistory.push('/list');
+				}
 			}
 			return state;
 			break;
+
 		default:
 			return state;
 			break;

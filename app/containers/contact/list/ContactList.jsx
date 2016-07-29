@@ -15,7 +15,8 @@ export default class ContactList extends React.Component {
 		let items = this.props.contacts.map((item, id)=> {
 			return (
 				<li key={id} className="grid-block vertical shrink card small">
-					<Link to="/" className="card-divider grid-block">
+					<Link to={{ pathname: '/single/' + item.id, query: { contact:JSON.stringify(item) } }}
+						  className="card-divider grid-block">
 						<div className="grid-block">
 							{item.prenom + ' ' + item.nom}
 						</div>
@@ -47,12 +48,4 @@ const mapStateToProps = (state) => {
 	}
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		removeContact: (param)=> {
-			dispatch({type: 'REMOVE_CONTACT', param: param});
-		}
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default connect(mapStateToProps, null)(ContactList);
