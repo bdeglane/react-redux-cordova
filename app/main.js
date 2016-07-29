@@ -2,5 +2,10 @@ import Contact from './Contact';
 import '../style/main.scss';
 
 let app = new Contact();
-document.addEventListener('deviceready', app.start, false);
+
+if (window.location.protocol === 'file:') {
+	document.addEventListener('deviceready', app.start, false);
+} else {
+	app.start();
+}
 
